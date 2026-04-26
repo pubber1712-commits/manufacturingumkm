@@ -4,6 +4,7 @@ import { getStorageData, saveStorageData, logActivity, syncToCloud } from '../li
 import { User as UserType } from '../types';
 import { generateId } from '../lib/utils';
 import { motion, AnimatePresence } from 'motion/react';
+import { useApp } from '../AppContext';
 
 export default function UsersPage() {
   const [users, setUsers] = useState<UserType[]>([]);
@@ -12,7 +13,7 @@ export default function UsersPage() {
   const [isEditing, setIsEditing] = useState(false);
   const [selectedUser, setSelectedUser] = useState<Partial<UserType>>({});
 
-  const { updateData } = useApp();
+  const { data, updateData } = useApp();
 
   useEffect(() => {
     setUsers(data.users);
