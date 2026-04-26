@@ -12,27 +12,30 @@ export default defineConfig(({mode}) => {
       tailwindcss(),
       VitePWA({
         registerType: 'autoUpdate',
+        devOptions: {
+          enabled: true
+        },
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
         manifest: {
-          name: 'Manufacturing',
-          short_name: 'MANUFACTURING',
+          name: 'ProMan HPP Manufacturing',
+          short_name: 'ProMan HPP',
           description: 'Aplikasi Manajemen Produksi & HPP Manufacturing',
           theme_color: '#050505',
           background_color: '#050505',
           display: 'standalone',
           icons: [
             {
-              src: 'pwa-192x192.png',
+              src: 'https://cdn-icons-png.flaticon.com/512/2611/2611152.png',
               sizes: '192x192',
               type: 'image/png'
             },
             {
-              src: 'pwa-512x512.png',
+              src: 'https://cdn-icons-png.flaticon.com/512/2611/2611152.png',
               sizes: '512x512',
               type: 'image/png'
             },
             {
-              src: 'pwa-512x512.png',
+              src: 'https://cdn-icons-png.flaticon.com/512/2611/2611152.png',
               sizes: '512x512',
               type: 'image/png',
               purpose: 'any maskable'
