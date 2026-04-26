@@ -29,6 +29,7 @@ import { AnimatePresence, motion } from 'motion/react';
 function AppContent() {
   const { user } = useApp();
   const [activeTab, setActiveTab] = useState('dashboard');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   if (!user) {
     return <LoginPage />;
@@ -53,9 +54,17 @@ function AppContent() {
 
   return (
     <div className="flex h-screen bg-bg-deep overflow-hidden">
-      <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Sidebar 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+      />
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <Navbar activeTab={activeTab} />
+        <Navbar 
+          activeTab={activeTab} 
+          onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+        />
         <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
           <AnimatePresence mode="wait">
             <motion.div
