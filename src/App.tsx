@@ -25,14 +25,31 @@ import ReportsPage from './pages/ReportsPage';
 import SettingsPage from './pages/SettingsPage';
 import UsersPage from './pages/UsersPage';
 import { AnimatePresence, motion } from 'motion/react';
+import InstallPWA from './components/common/InstallPWA';
+import { useRegisterSW } from 'virtual:pwa-register/react';
 
 function AppContent() {
   const { user } = useApp();
   const [activeTab, setActiveTab] = useState('dashboard');
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
+  // PWA registration with auto-update
+  useRegisterSW({
+    onRegistered(r) {
+      console.log('SW Registered: ' + r);
+    },
+    onRegisterError(error) {
+      console.log('SW registration error', error);
+    },
+  });
+
   if (!user) {
-    return <LoginPage />;
+    return (
+      <>
+        <LoginPage />
+        <InstallPWA />
+      </>
+    );
   }
 
   const renderContent = () => {
@@ -80,6 +97,7 @@ function AppContent() {
           </AnimatePresence>
         </main>
       </div>
+      <InstallPWA />
     </div>
   );
 }
