@@ -4,14 +4,15 @@
  */
 
 import React from 'react';
-import { Bell, Moon, Sun, Search, User } from 'lucide-react';
+import { Bell, Moon, Sun, Search, User, Menu } from 'lucide-react';
 import { useApp } from '../../AppContext';
 
 interface NavbarProps {
   activeTab: string;
+  onToggleSidebar?: () => void;
 }
 
-export default function Navbar({ activeTab }: NavbarProps) {
+export default function Navbar({ activeTab, onToggleSidebar }: NavbarProps) {
   const { user } = useApp();
   
   const getTabLabel = () => {
@@ -31,9 +32,16 @@ export default function Navbar({ activeTab }: NavbarProps) {
   };
 
   return (
-    <header className="h-16 border-b border-border-dim bg-bg-nav flex items-center justify-between px-10 shrink-0 sticky top-0 z-10">
-      <div className="flex items-center gap-8">
-        <h2 className="text-xs font-semibold text-brand-500 uppercase tracking-[0.2em]">
+    <header className="h-16 border-b border-border-dim bg-bg-nav flex items-center justify-between px-4 md:px-10 shrink-0 sticky top-0 z-30">
+      <div className="flex items-center gap-4 md:gap-8">
+        <button 
+          onClick={onToggleSidebar}
+          className="p-2 text-text-dim hover:text-text-stark md:hidden"
+        >
+          <Menu className="w-5 h-5" />
+        </button>
+
+        <h2 className="text-[10px] md:text-xs font-semibold text-brand-500 uppercase tracking-[0.2em] truncate max-w-[150px] md:max-w-none">
           {getTabLabel()}
         </h2>
         
@@ -46,11 +54,11 @@ export default function Navbar({ activeTab }: NavbarProps) {
         </div>
       </div>
 
-      <div className="flex items-center gap-6">
-        <button className="text-[10px] text-text-dim uppercase tracking-widest hover:text-text-stark transition-colors cursor-pointer">
+      <div className="flex items-center gap-4 md:gap-6">
+        <button className="hidden sm:block text-[10px] text-text-dim uppercase tracking-widest hover:text-text-stark transition-colors cursor-pointer">
           Search Database
         </button>
-        <button className="text-[10px] text-text-dim uppercase tracking-widest hover:text-text-stark transition-colors cursor-pointer">
+        <button className="hidden sm:block text-[10px] text-text-dim uppercase tracking-widest hover:text-text-stark transition-colors cursor-pointer">
           System Logs
         </button>
       </div>
